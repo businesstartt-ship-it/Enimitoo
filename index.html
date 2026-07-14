@@ -297,15 +297,15 @@ footer { background: var(--walnut); color: var(--cream); padding: 4rem 6% 2rem; 
     <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li class="dropdown">
-            <a href="#collections" class="dropdown-toggle">
+            <a href="javascript:void(0)" class="dropdown-toggle">
                 Collection <i class="fas fa-chevron-down"></i>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#collections" onclick="filterProductsByCategory('anime-figure')">Anime Figure</a></li>
-                <li><a href="#collections" onclick="filterProductsByCategory('katana')">Katana</a></li>
-                <li><a href="#collections" onclick="filterProductsByCategory('hotwheels')">Hotwheels Car</a></li>
-                <li><a href="#collections" onclick="filterProductsByCategory('bay-blade')">Bay Blade</a></li>
-                <li><a href="#collections" onclick="filterProductsByCategory('keychain')">Key-chain</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('anime-figure')">Anime Figure</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('katana')">Katana</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('hotwheels')">Hotwheels Car</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('bay-blade')">Bay Blade</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('keychain')">Key-chain</a></li>
             </ul>
         </li>
         <li><a href="#about">About Us</a></li>
@@ -475,11 +475,11 @@ footer { background: var(--walnut); color: var(--cream); padding: 4rem 6% 2rem; 
         <div class="footer-col">
             <h4>Collections</h4>
             <ul>
-                <li><a href="#collections" onclick="filterProductsByCategory('anime-figure')">Anime Figures</a></li>
-                <li><a href="#collections" onclick="filterProductsByCategory('katana')">Katanas</a></li>
-                <li><a href="#collections" onclick="filterProductsByCategory('hotwheels')">Hotwheels Cars</a></li>
-                <li><a href="#collections" onclick="filterProductsByCategory('bay-blade')">Bay Blade</a></li>
-                <li><a href="#collections" onclick="filterProductsByCategory('keychain')">Key-chains</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('anime-figure')">Anime Figures</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('katana')">Katanas</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('hotwheels')">Hotwheels Cars</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('bay-blade')">Bay Blade</a></li>
+                <li><a href="#collections" onclick="event.preventDefault(); filterProductsByCategory('keychain')">Key-chains</a></li>
             </ul>
         </div>
         <div class="footer-col">
