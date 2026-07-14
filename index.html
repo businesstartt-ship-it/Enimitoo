@@ -288,6 +288,7 @@ footer { background: var(--walnut); color: var(--cream); padding: 4rem 6% 2rem; 
 }
 </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -618,7 +619,7 @@ footer { background: var(--walnut); color: var(--cream); padding: 4rem 6% 2rem; 
 // ===== PRODUCT DATA =====
 const products = [
     // ANIME FIGURES
-    { id: 1, name: "Goku Ultra Instinct", category: "anime-figure", sku: "ENM-AF-002", price: 3200, oldPrice: 3800, image: "WhatsApp Image 2026-07-13 at 3.02.40 PM.jpeg", images: ["WhatsApp Image 2026-07-13 at 3.02.40 PM.jpeg", "WhatsApp Image 2026-07-13 at 3.02.41 PM (1).jpeg", "WhatsApp Image 2026-07-13 at 3.02.41 PM.jpeg" "WhatsApp Image 2026-07-13 at 3.02.42 PM (2).jpeg"], tag: "Bestseller" },
+    { id: 1, name: "Goku Ultra Instinct", category: "anime-figure", sku: "ENM-AF-002", price: 3200, oldPrice: 3800, image: "WhatsApp Image 2026-07-13 at 3.02.40 PM.jpeg", images: ["WhatsApp Image 2026-07-13 at 3.02.40 PM.jpeg", "WhatsApp Image 2026-07-13 at 3.02.41 PM (1).jpeg", "WhatsApp Image 2026-07-13 at 3.02.41 PM.jpeg", "WhatsApp Image 2026-07-13 at 3.02.42 PM (2).jpeg"], tag: "Bestseller" },
      { id: 2, name: "Luffy Gear 5 Figure", category: "anime-figure", sku: "ENM-AF-001", price: 2850, oldPrice: 3200, image: "WhatsApp Image 2026-07-13 at 3.01.47 PM.jpeg", tag: "New" },
     { id: 3, name: "Naruto Sage Mode", category: "anime-figure", sku: "ENM-AF-003", price: 2400, oldPrice: 2900, image: "WhatsApp Image 2026-07-13 at 3.01.56 PM.jpeg", tag: "Popular" },
     { id: 4, name: "Levi Ackerman", category: "anime-figure", sku: "ENM-AF-004", price: 2650, oldPrice: 3100, image: "WhatsApp Image 2026-07-13 at 3.01.55 PM.jpeg", tag: "Limited" },
@@ -959,12 +960,11 @@ function openProductDetail(productId) {
     document.getElementById('pdMainImg').alt = product.name;
     document.getElementById('pdMainImg').classList.remove('zoomed');
 
-    // Thumbnails (main image + 2 variations using same image for now)
-    const thumbsHtml = `
-        <img src="${product.image}" class="pd-thumb active" onclick="changePdImage(this, '${product.image}')" alt="${product.name}">
-        <img src="${product.image}" class="pd-thumb" onclick="changePdImage(this, '${product.image}')" alt="${product.name} view 2">
-        <img src="${product.image}" class="pd-thumb" onclick="changePdImage(this, '${product.image}')" alt="${product.name} view 3">
-    `;
+    // Thumbnails - use images array if available, fallback to main image
+    const imgList = product.images || [product.image];
+    const thumbsHtml = imgList.map((img, idx) => `
+        <img src="${img}" class="pd-thumb ${idx === 0 ? 'active' : ''}" onclick="changePdImage(this, '${img}')" alt="${product.name} view ${idx + 1}">
+    `).join('');
     document.getElementById('pdThumbs').innerHTML = thumbsHtml;
 
     // Info
