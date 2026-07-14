@@ -237,7 +237,57 @@ footer { background: var(--walnut); color: var(--cream); padding: 4rem 6% 2rem; 
 /* Scroll animations */
 .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+/* PRODUCT DETAIL MODAL */
+.product-detail-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 5000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 2rem; }
+.product-detail-overlay.active { opacity: 1; visibility: visible; }
+.product-detail-modal { background: var(--cream); border-radius: 16px; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0; position: relative; transform: scale(0.95); transition: transform 0.3s ease; }
+.product-detail-overlay.active .product-detail-modal { transform: scale(1); }
+.pd-close { position: absolute; top: 1rem; right: 1rem; width: 40px; height: 40px; border-radius: 50%; background: var(--walnut); color: var(--cream); border: none; font-size: 1.2rem; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+.pd-close:hover { background: var(--accent-red); }
+.pd-gallery { padding: 2rem; background: var(--cream-dark); display: flex; flex-direction: column; gap: 1rem; }
+.pd-main-img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; cursor: zoom-in; transition: transform 0.3s ease; }
+.pd-main-img.zoomed { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(2); z-index: 6000; max-width: 80vw; max-height: 80vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); cursor: zoom-out; }
+.pd-thumbs { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; }
+.pd-thumb { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 2px solid transparent; cursor: pointer; transition: var(--transition); flex-shrink: 0; }
+.pd-thumb.active { border-color: var(--accent-red); }
+.pd-thumb:hover { border-color: var(--copper); }
+.pd-info { padding: 2rem; display: flex; flex-direction: column; }
+.pd-tag { display: inline-block; background: var(--accent-red); color: var(--cream); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; width: fit-content; }
+.pd-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--walnut); margin-bottom: 0.5rem; }
+.pd-sku { font-size: 0.75rem; color: var(--text-light); letter-spacing: 1px; margin-bottom: 1rem; }
+.pd-price { font-size: 1.5rem; font-weight: 700; color: var(--accent-red); margin-bottom: 1.5rem; }
+.pd-price .old { font-size: 1rem; color: var(--text-light); text-decoration: line-through; margin-left: 0.5rem; font-weight: 400; }
+.pd-desc { color: var(--text-muted); line-height: 1.8; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.pd-features { margin-bottom: 1.5rem; }
+.pd-features h4 { font-size: 0.8rem; font-weight: 600; color: var(--walnut); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+.pd-features ul { list-style: none; }
+.pd-features ul li { font-size: 0.85rem; color: var(--text-muted); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem; }
+.pd-features ul li i { color: var(--accent-red); font-size: 0.7rem; }
+.pd-actions { display: flex; gap: 1rem; margin-top: auto; }
+.pd-add-cart { flex: 1; padding: 1rem; background: var(--accent-red); color: var(--cream); border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: var(--transition); }
+.pd-add-cart:hover { background: var(--walnut); }
+.pd-continue { padding: 1rem 1.5rem; background: transparent; color: var(--walnut); border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: var(--transition); }
+.pd-continue:hover { border-color: var(--accent-red); color: var(--accent-red); }
+
+.pd-related { grid-column: 1 / -1; padding: 2rem; border-top: 1px solid var(--border); }
+.pd-related h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--walnut); margin-bottom: 1.5rem; text-align: center; }
+.pd-related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+.pd-related-card { background: var(--cream); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; cursor: pointer; transition: var(--transition); }
+.pd-related-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.pd-related-card img { width: 100%; height: 120px; object-fit: cover; }
+.pd-related-card .rel-info { padding: 0.8rem; }
+.pd-related-card .rel-name { font-size: 0.8rem; font-weight: 600; color: var(--walnut); margin-bottom: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pd-related-card .rel-price { font-size: 0.85rem; font-weight: 700; color: var(--accent-red); }
+
+@media (max-width: 768px) {
+    .product-detail-modal { grid-template-columns: 1fr; max-height: 95vh; }
+    .pd-gallery { padding: 1rem; }
+    .pd-info { padding: 1rem; }
+    .pd-main-img { height: 250px; }
+    .pd-related-grid { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -608,11 +658,11 @@ function renderProducts(category) {
     const filtered = category === 'all' ? products : products.filter(p => p.category === category);
 
     grid.innerHTML = filtered.map(p => `
-        <div class="product-card fade-in">
+        <div class="product-card fade-in" onclick="openProductDetail(${p.id})">
             <div class="product-image">
                 <img src="${p.image}" alt="${p.name}" loading="lazy">
                 <span class="product-tag">${p.tag}</span>
-                <div class="product-actions">
+                <div class="product-actions" onclick="event.stopPropagation()">
                     <button onclick="addToCart(${p.id})" title="Add to Cart"><i class="fas fa-plus"></i></button>
                     <button onclick="quickView(${p.id})" title="Quick View"><i class="fas fa-eye"></i></button>
                 </div>
@@ -883,6 +933,145 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // ===== INIT =====
 renderProducts('all');
+
+// ===== PRODUCT DETAIL MODAL =====
+const productDescriptions = {
+    "anime-figure": "Premium quality anime figure crafted with high-grade PVC material. Features intricate hand-painted details, dynamic posing, and a sturdy base stand. Perfect for display on shelves, desks, or in glass cabinets. A must-have for any serious anime collector.",
+    "katana": "Authentic handcrafted katana made with traditional Japanese forging techniques. Features a high-carbon steel blade, genuine ray skin handle wrap, and decorative tsuba. Each piece is individually crafted by skilled artisans. Comes with a wooden saya (scabbard) for safe storage and display.",
+    "hotwheels": "Officially licensed Hotwheels die-cast model car in 1:64 scale. Features real rubber tires, detailed interior, and authentic body styling. Made with durable zinc alloy and plastic components. A perfect addition to any car enthusiast's collection.",
+    "bay-blade": "High-performance Beyblade with precision-engineered metal fusion system. Features a balanced attack ring, durable weight disk, and smooth-spinning performance tip. Includes launcher and ripcord for immediate battle readiness. Compete with friends or display as a collector's item.",
+    "keychain": "Detailed anime-themed keychain made from durable metal alloy and enamel. Features vibrant colors, intricate character design, and a sturdy keyring clasp. Perfect for keys, backpacks, or as a collectible accessory. Lightweight yet built to last daily use."
+};
+
+const productFeatures = {
+    "anime-figure": ["High-grade PVC construction", "Hand-painted details", "Sturdy display base included", "Officially licensed design", "Approximately 15-20cm height"],
+    "katana": ["High-carbon steel blade", "Traditional ray skin handle", "Decorative alloy tsuba", "Wooden saya included", "Full tang construction"],
+    "hotwheels": ["1:64 die-cast scale", "Real rubber tires", "Detailed interior", "Officially licensed", "Collector-grade quality"],
+    "bay-blade": ["Metal fusion system", "Balanced attack ring", "Durable weight disk", "Smooth performance tip", "Includes launcher & ripcord"],
+    "keychain": ["Metal alloy construction", "Vibrant enamel colors", "Sturdy keyring clasp", "Lightweight design", "Weather-resistant finish"]
+};
+
+function openProductDetail(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    // Main image
+    document.getElementById('pdMainImg').src = product.image;
+    document.getElementById('pdMainImg').alt = product.name;
+    document.getElementById('pdMainImg').classList.remove('zoomed');
+
+    // Thumbnails (main image + 2 variations using same image for now)
+    const thumbsHtml = `
+        <img src="${product.image}" class="pd-thumb active" onclick="changePdImage(this, '${product.image}')" alt="${product.name}">
+        <img src="${product.image}" class="pd-thumb" onclick="changePdImage(this, '${product.image}')" alt="${product.name} view 2">
+        <img src="${product.image}" class="pd-thumb" onclick="changePdImage(this, '${product.image}')" alt="${product.name} view 3">
+    `;
+    document.getElementById('pdThumbs').innerHTML = thumbsHtml;
+
+    // Info
+    document.getElementById('pdTag').textContent = product.tag;
+    document.getElementById('pdName').textContent = product.name;
+    document.getElementById('pdSku').textContent = product.sku;
+    document.getElementById('pdPrice').innerHTML = `BDT ${product.price.toLocaleString()} <span class="old">BDT ${product.oldPrice.toLocaleString()}</span>`;
+    document.getElementById('pdDesc').textContent = productDescriptions[product.category] || "Premium quality collectible item from Enimito. Carefully selected and handcrafted with attention to detail.";
+
+    // Features
+    const features = productFeatures[product.category] || ["Premium quality", "Handcrafted", "Imported", "Collector's item"];
+    document.getElementById('pdFeatures').innerHTML = features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('');
+
+    // Add to cart button
+    document.getElementById('pdAddCart').onclick = function() {
+        addToCart(product.id);
+        closeProductDetail();
+    };
+
+    // Related products (same category, excluding current)
+    const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+    if (related.length === 0) {
+        // Fallback: show random products
+        const other = products.filter(p => p.id !== product.id).slice(0, 4);
+        document.getElementById('pdRelatedGrid').innerHTML = other.map(p => `
+            <div class="pd-related-card" onclick="openProductDetail(${p.id})">
+                <img src="${p.image}" alt="${p.name}">
+                <div class="rel-info">
+                    <div class="rel-name">${p.name}</div>
+                    <div class="rel-price">BDT ${p.price.toLocaleString()}</div>
+                </div>
+            </div>
+        `).join('');
+    } else {
+        document.getElementById('pdRelatedGrid').innerHTML = related.map(p => `
+            <div class="pd-related-card" onclick="openProductDetail(${p.id})">
+                <img src="${p.image}" alt="${p.name}">
+                <div class="rel-info">
+                    <div class="rel-name">${p.name}</div>
+                    <div class="rel-price">BDT ${p.price.toLocaleString()}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Show modal
+    document.getElementById('productDetailOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProductDetail(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.getElementById('productDetailOverlay').classList.remove('active');
+    document.getElementById('pdMainImg').classList.remove('zoomed');
+    document.body.style.overflow = '';
+}
+
+function changePdImage(thumb, src) {
+    document.querySelectorAll('.pd-thumb').forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+    document.getElementById('pdMainImg').src = src;
+    document.getElementById('pdMainImg').classList.remove('zoomed');
+}
+
+function toggleZoom() {
+    document.getElementById('pdMainImg').classList.toggle('zoomed');
+}
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeProductDetail();
+        document.getElementById('checkoutModal').classList.remove('active');
+        toggleCart();
+    }
+});
 </script>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="product-detail-overlay" id="productDetailOverlay" onclick="closeProductDetail(event)">
+    <div class="product-detail-modal" id="productDetailModal">
+        <button class="pd-close" onclick="closeProductDetail()">&times;</button>
+        <div class="pd-gallery">
+            <img src="" alt="" class="pd-main-img" id="pdMainImg" onclick="toggleZoom()">
+            <div class="pd-thumbs" id="pdThumbs"></div>
+        </div>
+        <div class="pd-info">
+            <span class="pd-tag" id="pdTag"></span>
+            <h2 class="pd-name" id="pdName"></h2>
+            <p class="pd-sku" id="pdSku"></p>
+            <p class="pd-price" id="pdPrice"></p>
+            <p class="pd-desc" id="pdDesc"></p>
+            <div class="pd-features">
+                <h4>Product Features</h4>
+                <ul id="pdFeatures"></ul>
+            </div>
+            <div class="pd-actions">
+                <button class="pd-add-cart" id="pdAddCart">Add to Cart</button>
+                <button class="pd-continue" onclick="closeProductDetail()">Continue Shopping</button>
+            </div>
+        </div>
+        <div class="pd-related">
+            <h4>You May Also Like</h4>
+            <div class="pd-related-grid" id="pdRelatedGrid"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
