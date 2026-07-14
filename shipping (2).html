@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shipping Info | Enimito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+    --cream: #FAF6F1; --cream-dark: #F5EFE6;
+    --walnut: #3D2B1F; --walnut-light: #5C4033; --walnut-muted: #8B7355;
+    --copper: #B87333; --copper-dark: #8B5A2B; --copper-light: #D4A574;
+    --accent-red: #8B1E1E; --accent-red-light: #A52A2A;
+    --text: #2C1810; --text-muted: #6B5B4F; --text-light: #9B8B7F;
+    --border: #E8DDD0; --border-light: #F0E8DF;
+    --shadow: 0 4px 24px rgba(61,43,31,0.08);
+    --shadow-lg: 0 12px 48px rgba(61,43,31,0.12);
+    --transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+/* NAVIGATION */
+nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.2rem 4%; display: flex; align-items: center; justify-content: space-between; transition: var(--transition); background: rgba(250,246,241,0.95); backdrop-filter: blur(20px); box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--walnut); text-decoration: none; letter-spacing: 2px; }
+.logo span { color: var(--accent-red); }
+.nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; transition: var(--transition); position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background: var(--accent-red); transition: width 0.3s ease; }
+.nav-links a:hover { color: var(--walnut); }
+.nav-links a:hover::after { width: 100%; }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.cta-btn { padding: 0.7rem 1.8rem; background: var(--walnut); color: var(--cream); border: none; border-radius: 4px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-block; }
+.cta-btn:hover { background: var(--accent-red); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,30,30,0.25); }
+
+/* PAGE HEADER */
+.page-header { padding: 10rem 6% 4rem; text-align: center; background: var(--walnut); color: var(--cream); }
+.page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; margin-bottom: 1rem; }
+.page-header h1 span { color: var(--accent-red); }
+.page-header p { color: var(--copper-light); max-width: 500px; margin: 0 auto; font-size: 1rem; }
+
+/* CONTENT */
+.content { padding: 4rem 6%; max-width: 800px; margin: 0 auto; }
+.info-card { background: var(--cream-dark); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+.info-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--walnut); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
+.info-card h3 i { color: var(--accent-red); font-size: 1.1rem; }
+.info-card p { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 0.8rem; }
+.info-card ul { padding-left: 1.5rem; }
+.info-card ul li { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 0.3rem; }
+.info-card .highlight { color: var(--accent-red); font-weight: 600; }
+
+/* FOOTER */
+footer { background: var(--walnut); color: var(--cream); padding: 4rem 6% 2rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 1rem; }
+.footer-brand h3 span { color: var(--accent-red); }
+.footer-brand p { color: var(--copper-light); font-size: 0.85rem; line-height: 1.8; margin-bottom: 1rem; }
+.footer-brand .address { color: var(--copper-light); font-size: 0.8rem; line-height: 1.8; }
+.footer-brand .address a { color: var(--copper-light); text-decoration: none; }
+.footer-brand .address a:hover { color: var(--cream); }
+.footer-col h4 { font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; color: var(--copper-light); }
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.8rem; }
+.footer-col a { color: var(--copper-light); text-decoration: none; font-size: 0.85rem; transition: var(--transition); }
+.footer-col a:hover { color: var(--cream); }
+.footer-bottom { border-top: 1px solid rgba(184,115,51,0.2); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-bottom p { font-size: 0.8rem; color: var(--copper-light); }
+.footer-bottom span { color: var(--accent-red); }
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .page-header { padding-top: 8rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">ENI<span>MITO</span></a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#collections">Collection</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+        <a href="index.html#collections" class="cta-btn">Shop Now</a>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>Shipping <span>Information</span></h1>
+    <p>Fast, reliable delivery across Bangladesh</p>
+</div>
+
+<div class="content">
+    <div class="info-card">
+        <h3><i class="fas fa-clock"></i> Delivery Timeframes</h3>
+        <p>We pride ourselves on fast delivery. Here are our estimated delivery times:</p>
+        <ul>
+            <li><span class="highlight">Kushtia & Surrounding Areas:</span> Same day or within 24 hours</li>
+            <li><span class="highlight">Khulna Division:</span> 1-2 business days</li>
+            <li><span class="highlight">Dhaka, Chittagong, Rajshahi:</span> 2-3 business days</li>
+            <li><span class="highlight">Other Districts:</span> 3-5 business days</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3><i class="fas fa-box"></i> Packaging</h3>
+        <p>All orders are carefully packaged to ensure your collectibles arrive in perfect condition:</p>
+        <ul>
+            <li>Bubble wrap protection for fragile items</li>
+            <li>Sturdy cardboard boxes for figures and katanas</li>
+            <li>Waterproof packaging for all shipments</li>
+            <li>Original product packaging preserved whenever possible</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3><i class="fas fa-truck"></i> Shipping Partners</h3>
+        <p>We work with trusted courier services across Bangladesh including:</p>
+        <ul>
+            <li>Sundarban Courier</li>
+            <li>SA Paribahan</li>
+            <li>RedX</li>
+            <li>Pathao (for express delivery)</li>
+        </ul>
+        <p>Tracking information will be provided via SMS once your order is dispatched.</p>
+    </div>
+
+    <div class="info-card">
+        <h3><i class="fas fa-map-marker-alt"></i> Delivery Areas</h3>
+        <p>We deliver to all districts of Bangladesh. For remote areas, delivery may take an additional 1-2 days. Free delivery is available for orders over BDT 5,000 within Kushtia city limits.</p>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <h3>ENI<span>MITO</span></h3>
+            <p>Handcrafted anime collectibles inspired by Japanese culture. Since 2022, bringing joy to collectors across Bangladesh.</p>
+            <div class="address">
+                <i class="fas fa-location-dot"></i> 146 Anwar Yousuf Road<br>
+                Kushtia-7000, Bangladesh<br><br>
+                <a href="https://mail.google.com/mail/?view=cm&to=businesstartt@gmail.com" target="_blank">
+                    <i class="fas fa-envelope"></i> businesstartt@gmail.com
+                </a><br>
+                <a href="tel:+880141012903">
+                    <i class="fas fa-phone"></i> +880 1410-12903
+                </a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Collections</h4>
+            <ul>
+                <li><a href="index.html#collections">Anime Figures</a></li>
+                <li><a href="index.html#collections">Katanas</a></li>
+                <li><a href="index.html#collections">Hotwheels Cars</a></li>
+                <li><a href="index.html#collections">Bay Blade</a></li>
+                <li><a href="index.html#collections">Key-chains</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="shipping.html">Shipping Info</a></li>
+                <li><a href="returns.html">Returns</a></li>
+                <li><a href="track.html">Track Order</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <ul>
+                <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>Made by <span>Udoy Ahamed</span> — All Rights Reserved &copy; 2024 Enimito</p>
+    </div>
+</footer>
+
+</body>
+</html>
